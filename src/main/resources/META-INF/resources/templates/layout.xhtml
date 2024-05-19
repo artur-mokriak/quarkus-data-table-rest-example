@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<f:view locale="en">
+    <h:head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <h:outputStylesheet library="css" name="primeflex.css" />
+        <h:outputStylesheet library="css" name="style.css" />
+        <h:outputScript name="jquery/jquery.js" library="primefaces" />
+        <h:outputScript name="jquery/jquery-plugins.js" library="primefaces" />
+        <h:outputScript name="core.js" library="primefaces" />
+        <ui:insert name="content-head"/>
+    </h:head>
+
+    <title>#{text['title']}</title>
+
+    <h:body>
+        <div class="layout-wrapper">
+            <div class="layout-topbar">
+                <ui:include src="/templates/header.xhtml"/>
+            </div>
+            <div class="layout-sidebar">
+                <ui:include src="/templates/menu.xhtml"/>
+            </div>
+            <div class="layout-content">
+                <h:form id="content-form-top-toolbar" prependId="false">
+                    <div class="content-top-toolbar">
+                        <div class="content-title">
+                            <b><ui:insert name="content-title"/></b>
+                        </div>
+                        <p:messages id="content-messages" showDetail="true" closable="true" globalOnly="true">
+                            <p:autoUpdate/>
+                        </p:messages>
+                        <ui:insert name="content-top-toolbar"/>
+                    </div>
+                    <div>
+                        <ui:insert name="content"/>
+                    </div>
+                </h:form>
+                <ui:insert name="content-form-modaldialog"/>
+            </div>
+            <div class="layout-footer">
+                <ui:include src="/templates/footer.xhtml"/>
+            </div>
+        </div>
+    </h:body>
+</f:view>
+</html>

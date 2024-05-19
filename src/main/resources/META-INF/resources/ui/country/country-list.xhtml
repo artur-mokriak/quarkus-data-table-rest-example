@@ -1,0 +1,50 @@
+<ui:composition template="/index.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+    <f:metadata>
+        <f:viewAction action="#{countryListViewController.setupData}"/>
+    </f:metadata>
+
+    <ui:define name="content">
+        <p:dataTable id="content-datatable-countries" var="varCountry"
+                     value="#{countryListViewController.countryLazyDataModel}"
+                     paginator="true"
+                     lazy="true"
+                     currentPageReportTemplate="{startRecord} - {endRecord} of {totalRecords}"
+                     paginatorTemplate="{FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                     rowsPerPageTemplate="10,50,100,200,500"
+                     selection="#{countryListViewController.selectedCountry}"
+                     selectionMode="single"
+                     rowKey="#{varCountry.id}"
+                     binding="#{countryListViewController.dataTable}"
+                     emptyMessage="No records found">
+            <p:ajax event="sort" listener="#{countryListViewController.onSort}"/>
+            <f:facet name="header">
+                <div class="flex align-items-center justify-content-between">
+                    <span>List of Countries</span>
+                </div>
+            </f:facet>
+
+            <p:column id="column-id-name" headerText="Id" field="id">
+                <h:outputText value="#{varCountry.id}"/>
+            </p:column>
+
+            <p:column id="column-code-name" headerText="Code" field="code"
+                      sortBy="#{varCountry.code}"
+                      filterBy="#{varCountry.code}">
+                <h:outputText value="#{varCountry.code}"/>
+            </p:column>
+
+            <p:column id="column-name-name" headerText="Name" field="name"
+                      sortBy="#{varCountry.name}"
+                      filterBy="#{varCountry.name}">
+                <h:outputText value="#{varCountry.name}"/>
+            </p:column>
+
+        </p:dataTable>
+    </ui:define>
+</ui:composition>
+
